@@ -95,7 +95,9 @@ jobs:
 
   linux:
     name: Linux (.deb Ubuntu + .rpm Fedora)
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest (26.04) ships rpm 6, which electron-builder's fpm
+    # cannot drive; 24.04 has rpm 4.18 and matches the Ubuntu target.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
