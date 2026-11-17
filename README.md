@@ -130,7 +130,7 @@ Apple only allows apps that are **signed**. The IPA in Releases is **unsigned**,
 
 ---
 
-## 🏗️ Build it yourself
+## 🔧 Build it yourself
 
 ### Run the web app locally
 ```bash
@@ -285,7 +285,7 @@ Apple solo permite apps **firmadas**. El IPA de Releases **no está firmado**, a
 
 ### Windows / macOS
 - **Lo más fácil:** instala la [versión web](#web-pwa-todos-los-dispositivos) desde Chrome o Edge.
-- **App nativa (.exe / .dmg):** ver [Compilar tú mismo](#️-compilar-tú-mismo).
+- **App nativa (.exe / .dmg):** ver [Compilar tú mismo](#-compilar-tú-mismo).
 
 ## 🧭 Cómo usar Tinitus
 
@@ -334,7 +334,7 @@ Apple solo permite apps **firmadas**. El IPA de Releases **no está firmado**, a
 - Sin cuentas, sin servidores y sin analítica. Todos los datos se quedan **en tu dispositivo**.
 - Los sonidos se generan en el propio dispositivo; no se descargan archivos de audio.
 
-## 🏗️ Compilar tú mismo
+## 🔧 Compilar tú mismo
 
 **Web en local:**
 ```bash
