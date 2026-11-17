@@ -1,9 +1,9 @@
-name: Compilar apps (Android APK + iOS IPA)
+name: Compilar apps (Android, iOS y Linux)
 
 on:
   push:
     branches: [main]
-    # Documentation-only changes do not produce new APK/IPA builds
+    # Documentation-only changes do not produce new app builds
     paths-ignore:
       - "**.md"
       - "legal/**"
@@ -93,9 +93,32 @@ jobs:
           name: ios-ipa
           path: Tinitus-unsigned.ipa
 
+  linux:
+    name: Linux (.deb Ubuntu + .rpm Fedora)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Instalar rpmbuild
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq rpm
+      - name: Instalar dependencias
+        run: npm ci --no-audit --no-fund
+      - name: Compilar .deb y .rpm
+        # Version 1.0.<build> so that apt/dnf treat each release as an upgrade
+        run: npx electron-builder --linux deb rpm --x64 --publish never -c.extraMetadata.version=1.0.${{ github.run_number }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-packages
+          path: |
+            dist/Tinitus-amd64.deb
+            dist/Tinitus-x86_64.rpm
+
   release:
     name: Publicar descargas
-    needs: [android, ios]
+    needs: [android, ios, linux]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -106,7 +129,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG="build-${{ github.run_number }}"
-          gh release create "$TAG" Tinitus.apk Tinitus-unsigned.ipa \
+          gh release create "$TAG" Tinitus.apk Tinitus-unsigned.ipa Tinitus-amd64.deb Tinitus-x86_64.rpm \
             --repo "${{ github.repository }}" \
             --title "Tinitus · build ${{ github.run_number }}" \
-            --notes "Android APK (direct install) and unsigned iPhone/iPad IPA (install with Sideloadly or AltStore). See README."
+            --notes "Android APK (direct install), unsigned iPhone/iPad IPA (install with Sideloadly or AltStore), Linux .deb (Ubuntu 24.04) and .rpm (Fedora). See README."

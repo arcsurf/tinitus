@@ -17,6 +17,8 @@ Cross-platform app (**iPhone, iPad, Android, Windows, macOS and web**) that help
 | 🌐 **Web app (any device)** | **https://arcsurf.github.io/tinitus/** | [Install as an app](#web-app-pwa-all-devices) |
 | 🤖 **Android** | [`Tinitus.apk`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus.apk) | [Android guide](#android-apk) |
 | 🍎 **iPhone / iPad** | [`Tinitus-unsigned.ipa`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-unsigned.ipa) | [iPhone/iPad guide](#iphone--ipad-ipa) |
+| 🐧 **Linux: Ubuntu 24.04** | [`Tinitus-amd64.deb`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-amd64.deb) | [Linux guide](#linux-ubuntu--fedora) |
+| 🐧 **Linux: Fedora** | [`Tinitus-x86_64.rpm`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-x86_64.rpm) | [Linux guide](#linux-ubuntu--fedora) |
 | 💻 **Windows / macOS** | Web app, or build it yourself | [Desktop guide](#windows--macos) |
 
 All builds are on the [**Releases**](https://github.com/arcsurf/tinitus/releases) page. A new build is published automatically every time code is pushed to `main`.
@@ -70,6 +72,24 @@ Apple only allows apps that are **signed**. The IPA in Releases is **unsigned**,
 > ⏳ With a **free Apple ID** the app **expires after 7 days**. Repeat steps 4–5 to renew it; your data is kept. A free Apple ID can have at most 3 sideloaded apps at once.
 >
 > For a permanent install, use the [web app](#web-app-pwa-all-devices), or [publish via TestFlight / App Store](#-publishing-to-the-app-store-and-google-play) with a paid Apple Developer account.
+
+### Linux (Ubuntu / Fedora)
+Packages are for 64-bit PCs (x86_64). Open a terminal and run:
+
+**Ubuntu 24.04** (and other Debian-based distros):
+```bash
+wget https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-amd64.deb
+sudo apt install ./Tinitus-amd64.deb
+```
+
+**Fedora 45** (and other RPM-based distros):
+```bash
+sudo dnf install https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-x86_64.rpm
+```
+
+Then open **Tinitus** from the applications menu, or run `tinitus`. To update, repeat the same commands with the new release. To uninstall: `sudo apt remove tinitus` or `sudo dnf remove tinitus`.
+
+> The packages are not signed, so `dnf` shows a warning about skipped OpenPGP checks. That is expected.
 
 ### Windows / macOS
 - **Easiest:** install the [web app](#web-app-pwa-all-devices) from Chrome or Edge.
@@ -138,15 +158,16 @@ python -m http.server 8080 --directory www
 ```
 Then open http://localhost:8080
 
-### Desktop (.exe / .dmg) with Electron
+### Desktop (.exe / .dmg / .deb / .rpm) with Electron
 Requires [Node.js](https://nodejs.org) 18+.
 ```bash
 npm install
 npm run desktop
 npm run build:win
 npm run build:mac
+npm run build:linux
 ```
-The installers are created in `dist/`. Build the `.dmg` on a Mac.
+The installers are created in `dist/`. Build the `.dmg` on a Mac. `build:linux` creates both the `.deb` and the `.rpm`. It needs `rpmbuild`: on Ubuntu, `sudo apt install rpm`; on Fedora, `sudo dnf install rpm-build libxcrypt-compat`.
 
 ### Android and iOS with Capacitor
 Requires Node.js 18+, plus Android Studio (Android) and/or a Mac with Xcode (iOS).
@@ -162,7 +183,7 @@ npx cap open ios
 For iOS, enable *Signing & Capabilities → Background Modes → Audio* in Xcode.
 
 ### Automatic builds (GitHub Actions)
-- [`.github/workflows/build-apps.yml`](.github/workflows/build-apps.yml) builds the **Android APK** (Ubuntu) and the **unsigned iOS IPA** (macOS) on every push to `main` and publishes them as a Release.
+- [`.github/workflows/build-apps.yml`](.github/workflows/build-apps.yml) builds the **Android APK** (Ubuntu), the **unsigned iOS IPA** (macOS) and the **Linux .deb and .rpm** (Ubuntu) on every push to `main` and publishes them as a Release.
 - [`.github/workflows/pages.yml`](.github/workflows/pages.yml) publishes `www/` to **GitHub Pages**.
 - To start a build manually, go to *Actions → Compilar apps → Run workflow*.
 
@@ -197,8 +218,9 @@ www/                    Web app (plain HTML/CSS/JS, no dependencies)
   sw.js, manifest.webmanifest, icons/
 assets/                 Source icon and splash for native apps
 electron/main.js        Desktop wrapper (Windows/macOS/Linux)
+electron/linux/          .deb/.rpm install and uninstall scripts
 capacitor.config.json   Native mobile wrapper (iOS/Android)
-.github/workflows/      Automatic APK + IPA builds and GitHub Pages
+.github/workflows/      Automatic APK, IPA, .deb and .rpm builds, and GitHub Pages
 legal/                  Terms of Use in 5 languages
 ```
 
@@ -231,6 +253,8 @@ Tinitus es una app multiplataforma (**iPhone, iPad, Android, Windows, macOS y we
 | 🌐 **Web (cualquier dispositivo)** | **https://arcsurf.github.io/tinitus/** | [Instalar como app](#web-pwa-todos-los-dispositivos) |
 | 🤖 **Android** | [`Tinitus.apk`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus.apk) | [Guía Android](#android-apk-1) |
 | 🍎 **iPhone / iPad** | [`Tinitus-unsigned.ipa`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-unsigned.ipa) | [Guía iPhone/iPad](#iphone--ipad-ipa-1) |
+| 🐧 **Linux: Ubuntu 24.04** | [`Tinitus-amd64.deb`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-amd64.deb) | [Guía Linux](#linux-ubuntu--fedora-1) |
+| 🐧 **Linux: Fedora** | [`Tinitus-x86_64.rpm`](https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-x86_64.rpm) | [Guía Linux](#linux-ubuntu--fedora-1) |
 | 💻 **Windows / macOS** | App web, o compilar | [Guía escritorio](#windows--macos-1) |
 
 Todas las compilaciones están en [**Releases**](https://github.com/arcsurf/tinitus/releases). Cada vez que se sube código a `main` se publica una nueva automáticamente.
@@ -282,6 +306,24 @@ Apple solo permite apps **firmadas**. El IPA de Releases **no está firmado**, a
 > ⏳ Con un **Apple ID gratuito** la app **caduca a los 7 días**. Repite los pasos 4–5 para renovarla; tus datos se conservan. Un Apple ID gratuito admite como máximo 3 apps instaladas así a la vez.
 >
 > Para una instalación permanente usa la [versión web](#web-pwa-todos-los-dispositivos), o [publica en TestFlight / App Store](#-publicar-en-app-store-y-google-play) con una cuenta de desarrollador de pago.
+
+### Linux (Ubuntu / Fedora)
+Los paquetes son para PCs de 64 bits (x86_64). Abre una terminal y ejecuta:
+
+**Ubuntu 24.04** (y otras distros basadas en Debian):
+```bash
+wget https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-amd64.deb
+sudo apt install ./Tinitus-amd64.deb
+```
+
+**Fedora 45** (y otras distros basadas en RPM):
+```bash
+sudo dnf install https://github.com/arcsurf/tinitus/releases/latest/download/Tinitus-x86_64.rpm
+```
+
+Después abre **Tinitus** desde el menú de aplicaciones, o ejecuta `tinitus`. Para actualizar, repite los mismos comandos con la nueva versión. Para desinstalar: `sudo apt remove tinitus` o `sudo dnf remove tinitus`.
+
+> Los paquetes no están firmados, así que `dnf` avisa de que se saltan las comprobaciones OpenPGP. Es lo esperado.
 
 ### Windows / macOS
 - **Lo más fácil:** instala la [versión web](#web-pwa-todos-los-dispositivos) desde Chrome o Edge.
@@ -342,14 +384,15 @@ python -m http.server 8080 --directory www
 ```
 Después abre http://localhost:8080
 
-**Escritorio (.exe / .dmg) con Electron.** Requiere [Node.js](https://nodejs.org) 18+.
+**Escritorio (.exe / .dmg / .deb / .rpm) con Electron.** Requiere [Node.js](https://nodejs.org) 18+.
 ```bash
 npm install
 npm run desktop
 npm run build:win
 npm run build:mac
+npm run build:linux
 ```
-Los instaladores se generan en `dist/`. El `.dmg` hay que generarlo en un Mac.
+Los instaladores se generan en `dist/`. El `.dmg` hay que generarlo en un Mac. `build:linux` genera el `.deb` y el `.rpm`. Necesita `rpmbuild`: en Ubuntu, `sudo apt install rpm`; en Fedora, `sudo dnf install rpm-build libxcrypt-compat`.
 
 **Android e iOS con Capacitor.** Requiere Node.js 18+, y además Android Studio (Android) y/o un Mac con Xcode (iOS).
 ```bash
@@ -364,7 +407,7 @@ npx cap open ios
 En iOS, activa en Xcode *Signing & Capabilities → Background Modes → Audio*.
 
 **Compilaciones automáticas (GitHub Actions):**
-- [`build-apps.yml`](.github/workflows/build-apps.yml) genera el **APK de Android** y el **IPA de iOS sin firmar** en cada push a `main` y los publica en Releases.
+- [`build-apps.yml`](.github/workflows/build-apps.yml) genera el **APK de Android**, el **IPA de iOS sin firmar** y los paquetes **.deb y .rpm de Linux** en cada push a `main` y los publica en Releases.
 - [`pages.yml`](.github/workflows/pages.yml) publica `www/` en **GitHub Pages**.
 - Para lanzar una compilación a mano: *Actions → Compilar apps → Run workflow*.
 
