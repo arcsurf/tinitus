@@ -3,6 +3,13 @@ name: Compilar apps (Android APK + iOS IPA)
 on:
   push:
     branches: [main]
+    # Documentation-only changes do not produce new APK/IPA builds
+    paths-ignore:
+      - "**.md"
+      - "legal/**"
+      - "LICENSE"
+      - ".gitignore"
+      - ".gitattributes"
   workflow_dispatch:
 
 permissions:
