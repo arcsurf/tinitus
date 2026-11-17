@@ -1,0 +1,35 @@
+{
+  "name": "tinitus",
+  "version": "1.0.0",
+  "description": "Tinitus: terapia sonora, relajación y seguimiento para el acúfeno (tinnitus).",
+  "main": "electron/main.js",
+  "license": "MIT",
+  "scripts": {
+    "web": "npx serve www",
+    "desktop": "electron .",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "cap:add:android": "cap add android",
+    "cap:add:ios": "cap add ios",
+    "cap:sync": "cap sync",
+    "cap:android": "cap open android",
+    "cap:ios": "cap open ios"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "app.tinitus.mobile",
+    "productName": "Tinitus",
+    "files": ["electron/**", "www/**", "package.json"],
+    "win": { "target": "nsis", "icon": "www/icons/icon-512.png" },
+    "mac": { "target": "dmg", "category": "public.app-category.healthcare-fitness", "icon": "www/icons/icon-512.png" },
+    "linux": { "target": "AppImage", "icon": "www/icons/icon-512.png" }
+  }
+}

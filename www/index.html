@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tinitus · Tinnitus therapy</title>
+  <meta name="description" content="Sound therapy, relaxation and tracking for tinnitus, with profiles for each type of tinnitus.">
+  <meta name="theme-color" content="#0e1624">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tinitus">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#home" class="brand"><img src="icons/icon.svg" alt=""> Tinitus</a>
+    <nav class="topnav">
+      <a href="#home" data-nav="home" data-t="nav_home">Home</a>
+      <a href="#therapy" data-nav="therapy" data-t="nav_therapy">Therapy</a>
+      <a href="#relax" data-nav="relax" data-t="nav_relax_long">Relaxation</a>
+      <a href="#diary" data-nav="diary" data-t="nav_diary">Diary</a>
+      <a href="#more" data-nav="more" data-t="nav_more">More</a>
+    </nav>
+  </header>
+
+  <div id="miniplayer" hidden>
+    <a href="#therapy" class="mini-info"><span id="miniName"></span> <small id="miniTime"></small></a>
+    <button class="btn small" data-action="stopMini" aria-label="Stop">■</button>
+  </div>
+
+  <main id="view" tabindex="-1"></main>
+
+  <nav class="bottomnav">
+    <a href="#home" data-nav="home"><span>🏠</span><em data-t="nav_home">Home</em></a>
+    <a href="#therapy" data-nav="therapy"><span>🎧</span><em data-t="nav_therapy">Therapy</em></a>
+    <a href="#relax" data-nav="relax"><span>🌿</span><em data-t="nav_relax">Relax</em></a>
+    <a href="#diary" data-nav="diary"><span>📈</span><em data-t="nav_diary">Diary</em></a>
+    <a href="#more" data-nav="more"><span>☰</span><em data-t="nav_more">More</em></a>
+  </nav>
+
+  <div id="toast" role="status" hidden></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n/en.js"></script>
+  <script src="js/i18n/es.js"></script>
+  <script src="js/i18n/de.js"></script>
+  <script src="js/i18n/fr.js"></script>
+  <script src="js/i18n/ja.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
