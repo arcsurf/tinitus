@@ -27,12 +27,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
       - name: Instalar dependencias
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Crear proyecto Android
         run: npx cap add android
       - name: Generar iconos y pantalla de inicio
@@ -59,8 +60,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
       - name: Instalar dependencias
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Crear proyecto iOS
         run: npx cap add ios
       - name: Generar iconos y pantalla de inicio
